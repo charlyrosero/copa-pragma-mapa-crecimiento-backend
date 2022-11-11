@@ -1,0 +1,57 @@
+{
+    "id_valoracion": "V000014590",
+    "fecha": "11/11/2023 13:12:45",
+    "id_pragmatico": "juanpablo.cuervo@pragma.com.co",
+    "id_rol": 1000,
+    "rol": "Backend",
+    "pragma_powers": [
+        {
+            "id": 330,
+            "nombre": "Protocolos",
+            "descripcion": "Es capaz de consumir un servicio utilizando REST y un protocolo de aplicacion adicional (STOMP, RSocket, gRPC o SOAP), entendiendo las caracteristicas del protocolo, estructura de los mensajes y modelo de procesado.",
+            "valor": 3
+        },
+        {
+            "id": 210,
+            "nombre": "Frameworks",
+            "descripcion": "Conoce en profundidad 1 Framework sobre su lenguaje de programacion primario, lo que le permite escribir codigo mas claro y menor boilerplate. (Seguridad, ORM y Programacion Orientada a Aspectos)",
+            "valor": 3
+        },
+        {
+            "id": 40,
+            "nombre": "Bases de Datos",
+            "descripcion": "Puede realizar cualquier operacion de SQL usando DML, TCL, DQL, DDL en bases de datos relacionales",
+            "valor": 5
+        },
+        {
+            "id": 260,
+            "nombre": "No SQL",
+            "descripcion": "Conoce las principales caracteristicas de las bases de datos NoSQL y sabe cuando usar SQL o No SQL.",
+            "valor": 3
+        },
+        {
+            "id": 250,
+            "nombre": "Metodologias Desarrollo",
+            "descripcion": "Tiene comprensión conceptual y aplica estrategías de desarrollo BDD o TDD",
+            "valor": 4
+        },
+        {
+            "id": 150,
+            "nombre": "Documentacion",
+            "descripcion": "Sabe documentar las APIs usando al menos uno de los lenguajes de descripcion (OpenAPI, RAML, AsyncAPI, API Blueprint)",
+            "valor": 2
+        },
+        {
+            "id": 340,
+            "nombre": "SDLC",
+            "descripcion": "Conoce las caracteristicas basicas del Dependency Manager y Build Automation de su lenguaje de programación primario y las integra con el proceso DevOps dentro del proyecto.",
+            "valor": 3
+        }
+    ],
+    "pragma_level": {
+        "id_seniority": 30,
+        "seniority": "Advanced",
+        "nivel": "L3",
+        "score_total": 3.5
+    }
+}

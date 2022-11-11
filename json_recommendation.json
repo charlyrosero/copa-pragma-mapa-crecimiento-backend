@@ -1,0 +1,28 @@
+{ 
+   "id_pragmatico":"xxxx@pragma.com.co", 
+   "id_plan_carrera":1000, 
+   "id_valoracion":"V000014581", 
+   "fecha_creacion":"datetime.datetime.now()", 
+   "creado_por":"pepe.gomez@pragma.com.co", 
+   "descripcion_plan":"backend", 
+   "recursos_aprendizaje":[ 
+      {
+         "id_pragma_power":330,
+         "nombre":"Protocolos",
+         "descripcion":"Es capaz de consumir un servicio utilizando REST y un protocolo de aplicacion adicional (STOMP, RSocket, gRPC o SOAP), entendiendo las caracteristicas del protocolo, estructura de los mensajes y modelo de procesado.", 
+         "valor":3, 
+         "recurso":"REST API Automation:REST Assured,Serenity BDD Framework",
+         "plataforma":"Udemy", 
+         "link":"https://www.udemy.com/course/rest-api-automation-with-rest-assuredserenity-bdd-framework/" 
+      }, 
+      { 
+         "id_pragma_power":210, 
+         "nombre":"Frameworks",
+         "descripcion":"Conoce en profundidad 1 Framework sobre su lenguaje de programacion primario, lo que le permite escribir codigo mas claro y menor boilerplate. (Seguridad, ORM y Programacion Orientada a Aspectos)",
+         "valor":3,
+         "recurso":"Universidad Spring - Spring Framework y Spring Boot!",
+         "plataforma":"Udemy",
+         "link":"https://www.udemy.com/course/universidad-spring-framework-springboot-java-security-rest-webservices/"
+      }
+   ]
+}
