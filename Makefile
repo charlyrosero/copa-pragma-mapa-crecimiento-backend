@@ -12,7 +12,7 @@ test:
 	#test
 	python -m pytest -vv --cov=library test_logic.py test_*.py
 run:
-	docker run -p 127.0.0.1:8080:8080 1dc64134b568
+	docker run -p 127.0.0.1:8080:8080 mapa-crecimiento-backend:latest
 build:
 	#build container
 	docker build -t mapa-crecimiento-backend .

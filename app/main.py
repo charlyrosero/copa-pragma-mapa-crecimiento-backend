@@ -17,12 +17,7 @@ import motor.motor_asyncio
 app = FastAPI()
 client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://pragma:pragma123@copapragmadb.cluster-cpoxrljke2qk.us-east-1.docdb.amazonaws.com:27017/?retryWrites=false")
 db = client.mapa_crecimiento
-
-def enviar_mensaje_sqs(Message={}):
-    sqs = boto3.resource("sqs", region_name="us-east-1")
-    data = json.dumps(Message)
-    response = sqs.queue.send_message(MessageBody=data)
-    return response
+sqs_valoration_url="https://sqs.us-east-1.amazonaws.com/107714303354/valorationQueue"
 
 class PyObjectId(ObjectId):
     @classmethod
@@ -136,9 +131,6 @@ class recommendationModel(BaseModel):
     id_plan_carrera: str
     id_valoracion: str
     fecha_creacion: str
-    creado_por: str
-    fecha_modificacion:str
-    modificado_por:str   
     descripcion_plan: str
     recursos_aprendizaje : List[learnresourceModel]
 
@@ -276,7 +268,7 @@ async def create_recommendation(recommendation: recommendationModel = Body(...))
 @app.post("/valoracion", response_description="Add new valoration", response_model=valorationModel)
 async def create_valoration(valoration: valorationModel = Body(...)):
     
-    sqs_client =  boto3.resource(
+    sqs_client =  boto3.client(
         'sqs',
         region_name='us-east-1'
     )
@@ -286,67 +278,8 @@ async def create_valoration(valoration: valorationModel = Body(...)):
     new_valoration = await db["valoraciones"].insert_one(valoration)
     created_recommendation = await db["valoraciones"].find_one({"_id": new_valoration.inserted_id})
 
-    #message = {"Copa Pragma": "Ganador Equipo 10"}
-    Qname = sqs_client.get_queue_by_name(QueueName="valorationQueue")
-    valoracion = {
-        "id_valoracion": "V000014581",
-        "fecha": "10/01/2023 09:12:45",
-        "id_pragmatico": "xxxx@pragma.com.co",
-        "id_rol": 1000,
-        "rol": "Backend",
-        "pragma_powers": [
-            {
-                "id": 330,
-                "nombre": "Protocolos",
-                "descripcion": "Es capaz de consumir un servicio utilizando REST y un protocolo de aplicacion adicional (STOMP, RSocket, gRPC o SOAP), entendiendo las caracteristicas del protocolo, estructura de los mensajes y modelo de procesado.",
-                "valor": 3
-            },
-            {
-                "id": 210,
-                "nombre": "Frameworks",
-                "descripcion": "Conoce en profundidad 1 Framework sobre su lenguaje de programacion primario, lo que le permite escribir codigo mas claro y menor boilerplate. (Seguridad, ORM y Programacion Orientada a Aspectos)",
-                "valor": 3
-            },
-            {
-                "id": 40,
-                "nombre": "Bases de Datos",
-                "descripcion": "Puede realizar cualquier operacion de SQL usando DML, TCL, DQL, DDL en bases de datos relacionales",
-                "valor": 5
-            },
-            {
-                "id": 260,
-                "nombre": "No SQL",
-                "descripcion": "Conoce las principales caracteristicas de las bases de datos NoSQL y sabe cuando usar SQL o No SQL.",
-                "valor": 3
-            },
-            {
-                "id": 250,
-                "nombre": "Metodologias Desarrollo",
-                "descripcion": "Tiene comprensión conceptual y aplica estrategías de desarrollo BDD o TDD",
-                "valor": 4
-            },
-            {
-                "id": 150,
-                "nombre": "Documentacion",
-                "descripcion": "Sabe documentar las APIs usando al menos uno de los lenguajes de descripcion (OpenAPI, RAML, AsyncAPI, API Blueprint)",
-                "valor": 2
-            },
-            {
-                "id": 340,
-                "nombre": "SDLC",
-                "descripcion": "Conoce las caracteristicas basicas del Dependency Manager y Build Automation de su lenguaje de programación primario y las integra con el proceso DevOps dentro del proyecto.",
-                "valor": 3
-            },
-        ],
-        "pragma_level": {
-            "id_seniority": 30,
-            "seniority": "Advanced",
-            "nivel": "L3",
-            "score_total": 3.5
-        }
-    }
-
-    response = Qname.send_message(MessageBody=json.dumps(valoration))
+ 
+    response = sqs_client.send_message(QueueUrl=sqs_valoration_url,MessageBody=json.dumps(valoration))
     print(response)
     
     #return response
